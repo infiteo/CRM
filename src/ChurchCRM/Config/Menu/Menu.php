@@ -144,11 +144,13 @@ class Menu
         $depositsMenu->addSubMenu(new MenuItem(gettext('View All Deposits'), 'FindDepositSlip.php', AuthenticationManager::getCurrentUser()->isFinanceEnabled()));
         $depositsMenu->addSubMenu(new MenuItem(gettext('Deposit Reports'), 'FinancialReports.php', AuthenticationManager::getCurrentUser()->isFinanceEnabled()));
         $depositsMenu->addSubMenu(new MenuItem(gettext('Edit Deposit Slip'), 'DepositSlipEditor.php?DepositSlipID=' . $_SESSION['iCurrentDeposit'], AuthenticationManager::getCurrentUser()->isFinanceEnabled()));
+        $depositsMenu->addSubMenu(new MenuItem(gettext('Church Balance'), 'ChurchBalance.php', AuthenticationManager::getCurrentUser()->isFinanceEnabled()));
         $depositsMenu->addCounter(new MenuCounter('iCurrentDeposit', 'bg-green', $_SESSION['iCurrentDeposit']));
 
         $adminMenu = new MenuItem(gettext('Admin'), '', AuthenticationManager::getCurrentUser()->isAdmin());
         $adminMenu->addSubMenu(new MenuItem(gettext('Envelope Manager'), 'ManageEnvelopes.php', AuthenticationManager::getCurrentUser()->isAdmin()));
         $adminMenu->addSubMenu(new MenuItem(gettext('Donation Funds'), 'DonationFundEditor.php', AuthenticationManager::getCurrentUser()->isAdmin()));
+        $adminMenu->addSubMenu(new MenuItem(gettext('Balance Categories'), 'ChurchBalanceCategories.php', AuthenticationManager::getCurrentUser()->isAdmin()));
 
         $depositsMenu->addSubMenu($adminMenu);
 

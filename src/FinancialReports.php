@@ -51,6 +51,7 @@ if ($sReportType == '') {
     echo "<option value='Zero Givers'>" . gettext('Zero Givers') . '</option>';
     echo "<option value='Individual Deposit Report'>" . gettext('Individual Deposit Report') . '</option>';
     echo "<option value='Advanced Deposit Report'>" . gettext('Advanced Deposit Report') . '</option>';
+    echo "<option value='Church Balance Report'>" . gettext('Church Balance Report') . '</option>';
     echo '</select>';
     echo '</td></tr>';
     // First Pass Cancel, Next Buttons
@@ -89,6 +90,9 @@ if ($sReportType == '') {
             break;
         case 'Advanced Deposit Report':
             $action = 'Reports/AdvancedDeposit.php';
+            break;
+        case 'Church Balance Report':
+            $action = 'Reports/ChurchBalanceReport.php';
             break;
     }
     echo "<form method=post action=\"$action\">";
@@ -172,7 +176,7 @@ if ($sReportType == '') {
     }
 
     // Starting and Ending Dates for Report
-    if (in_array($sReportType, ['Giving Report', 'Advanced Deposit Report', 'Zero Givers'])) {
+    if (in_array($sReportType, ['Giving Report', 'Advanced Deposit Report', 'Zero Givers', 'Church Balance Report'])) {
         $today = date('Y-m-d');
         echo '<tr><td class=LabelColumn>' . gettext('Report Start Date:') . "</td>
             <td class=TextColumn><input type=text name=DateStart class='date-picker' maxlength=10 id=DateStart size=11 value='$today'></td></tr>";
@@ -302,7 +306,7 @@ if ($sReportType == '') {
 
     if (
         ((AuthenticationManager::getCurrentUser()->isAdmin() && $bCSVAdminOnly) || !$bCSVAdminOnly)
-        && (in_array($sReportType, ['Pledge Summary', 'Giving Report', 'Individual Deposit Report', 'Advanced Deposit Report', 'Zero Givers']))
+        && (in_array($sReportType, ['Pledge Summary', 'Giving Report', 'Individual Deposit Report', 'Advanced Deposit Report', 'Zero Givers', 'Church Balance Report']))
     ) {
         echo '<tr><td class=LabelColumn>' . gettext('Output Method:') . '</td>';
         echo "<td class=TextColumnWithBottomBorder><input name=output type=radio checked value='pdf'>PDF";
